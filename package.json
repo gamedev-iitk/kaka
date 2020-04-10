@@ -1,0 +1,10 @@
+{
+  "name": "kaka",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mayant Mukul <mayantmukul@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.1.1"
+  }
+}
