@@ -42,7 +42,7 @@ client.on('message', msg => {
         // $remind <Mention> <Time> <Message>
         if (command === '$remind') {
             var param = parseReminderParams(text) // in milliseconds
-            if(isNaN(param.time)||param.time<18){
+            if(isNaN(param.time)||param.time<600){
                 msg.reply("Enter Time duration or I will go on a frenzy :) \n The syntax is as follows $remind <Mention> <Time> <Message>");
             }
             else{
