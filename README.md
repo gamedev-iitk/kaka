@@ -1,4 +1,5 @@
 # Kaka
+<a href="https://lgtm.com/projects/g/gamedev-iitk/kaka/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/gamedev-iitk/kaka.svg?logo=lgtm&logoWidth=18"/></a>
 
 A Discord bot for our server.
 
