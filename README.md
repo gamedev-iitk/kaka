@@ -6,9 +6,13 @@ A Discord bot for our server.
 
 It has three basic functions for now.
 1. `$ping`: Replies with `pong`, just to check if the bot is online
-1. `$remind`: Message format is very very important for now as it has absolutely no error checking. Format is 
+1. `$remind`: Message format is somewhat important for now as it has basic error tolerance. Format is 
 ```
 $remind <mention> <time (in hrs)> <reminder message>
+```
+1. `$remindonce`: Message format is somewhat important for now as it has basic error tolerance. Format is 
+```
+$remindonce <mention> <time (in hrs)> <reminder message>
 ```
 1. `$clear`: Clears the reminder
 
