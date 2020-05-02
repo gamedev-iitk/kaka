@@ -2,8 +2,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const config = require('./_config.json');
-
 // Variables
 var reminder;
 
@@ -63,4 +61,5 @@ client.on('message', msg => {
     }
 });
 
-client.login(config.token);
+// You'll need to keep the bot token as a Heroku env var
+client.login(process.env.BOT_TOKEN);

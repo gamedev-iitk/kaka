@@ -1,2 +1,4 @@
-_config.json
-node_modules/*
+node_modules/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
