@@ -40,10 +40,10 @@ client.on('message', msg => {
         // $remind <Mention> <Time> <Message>
         if (command === '$remind') {
             var param = parseReminderParams(text) // in milliseconds
-            if(isNaN(param.time)||param.time<600){
+            if (isNaN(param.time) || param.time < 600) {
                 msg.reply("Enter Time duration or I will go on a frenzy :) \n The syntax is as follows $remind <Mention> <Time> <Message>");
             }
-            else{
+            else {
                 console.log(param.time);
                 reminder = setInterval(sendReminder, param.time, msg.channel, param.mention, param.message);
             }
@@ -53,10 +53,16 @@ client.on('message', msg => {
         if (command === '$clear') {
             clearInterval(reminder);
         }
-        if(command == '$remindonce'){
+
+        if (command == '$remindonce') {
             var param = parseReminderParams(text);
-            
+
             reminder = setTimeout(sendReminder, param.time, msg.channel, param.mention, param.message);
+        }
+
+        if (command == '$thanks') {
+            var mention = text[1];
+            msg.reply(`Thank you ${mention}!`);
         }
     }
 });
