@@ -62,7 +62,10 @@ client.on('message', msg => {
 
         if (command == '$thanks') {
             var mention = text[1];
-            msg.reply(`Thank you ${mention}!`);
+            if (mention == null) {
+                msg.channel.send("Thank you!\n *psst!* Use a mention next time.");
+            }
+            msg.channel.send(`Thank you ${mention}!`);
         }
     }
 });
