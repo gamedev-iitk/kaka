@@ -35,6 +35,45 @@ function exec_thanks(msg: Discord.Message, mention: string) {
     }
 }
 
+// https://stackoverflow.com/questions/63784594/how-do-i-add-roles-via-discord-js
+async function exec_role(msg: Discord.Message, arg: string) {
+    let member = msg.member;
+    if (!member) {
+        return msg.channel.send("Can't find the user in server");
+    }
+
+    let guild = msg.guild;
+    if (!guild) {
+        return msg.channel.send("Can't find the active server");
+    }
+
+    let role =
+        guild.roles.cache.find((r) => r.name == arg) ||
+        guild.roles.cache.find((r) => r.id == arg);
+    if (!role) {
+        return msg.channel.send("I couldn't find that role. Is the spelling correct?");
+    }
+
+    if (guild.me == null || !guild.me.hasPermission(["MANAGE_ROLES"])) {
+        return msg.channel.send("I don't have the permissions to do this. Give me power Admins!");
+    }
+
+    if (member.roles != null && member.roles.cache.has(role.id)) {
+        return msg.channel.send("You already have this role");
+    } else {
+        // TODO: Idk why this does not work. Trying to add a role higher than the bot's role should log
+        // an error through the catch branch. But I still get the first branch. No role though, so this
+        // is only an issue about reporting the right error.
+        try {
+            await member.roles.add(role.id).catch((e) => console.log(e));
+            return msg.channel.send(`The role ${role.name} has been added to the user ${member.displayName}`);
+        } catch (e) {
+            console.error(e);
+            return msg.channel.send("There was an issue adding the role. Ask the maintainer to check the logs.");
+        }
+    }
+}
+
 // Register callbacks
 
 client!.on('ready', () => {
@@ -43,7 +82,7 @@ client!.on('ready', () => {
     }
 });
 
-client.on('message', msg => {
+client.on('message', async function (msg: Discord.Message) {
     if (msg.content.startsWith('$')) {
         const text = msg.content.split(" ");
         let command = text[0];
@@ -55,6 +94,10 @@ client.on('message', msg => {
 
         if (command === "$thanks") {
             exec_thanks(msg, text[1]);
+        }
+
+        if (command === "$role") {
+            await exec_role(msg, text[1]);
         }
 
         /*
