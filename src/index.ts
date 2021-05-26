@@ -1,6 +1,6 @@
-//import * as Discord from 'discord.js';
+import * as Discord from 'discord.js';
 
-const Discord = require('discord.js');
+//const Discord = require('discord.js');
 
 const client = new Discord.Client();
 
@@ -25,14 +25,20 @@ function parseReminderParams(text: string) {
 }
 */
 
+
+
 const roles = [
     {id: 'programmer', name: 'Programmer'},
     {id: 'artist', name: 'Artist'},
     {id: 'design', name: 'Design'},
     {id: 'sound design', name: 'Sound Design'},
-    {id: 'worldbuilding', name: 'Worldbuilding'}
-];
+    {id: 'worldbuilding', name: 'Worldbuilding'},
 
+    {id: 'y17', name: 'Y17'},
+    {id: 'y18', name: 'Y18'},
+    {id: 'y19', name: 'Y19'},
+    {id: 'y20', name: 'Y20'}
+];
 
 /*
 
@@ -41,6 +47,8 @@ client.once('ready', () => {
 });
 
 */
+
+
 
 // UNCOMMENT THIS --------------------------------------------------------------------------------------------------//
 
@@ -67,7 +75,8 @@ async function exec_role(msg: Discord.Message, arg: string) {
     let role_data = roles.find(c => c.id === arg);
     
     if(!role_data){
-        msg.channel.send(`Hey first take a look at the available roles`);
+        if(arg[0]=='y') return msg.channel.send("Are you from IITK? If yes then reach out to the moderators to get your batch role added to the list.");
+        else return msg.channel.send(`Hey first take a look at the available roles.`);
     }
 
     arg = role_data?.name;
@@ -90,6 +99,7 @@ async function exec_role(msg: Discord.Message, arg: string) {
     let role =
         guild.roles.cache.find((r) => r.name == arg) ||
         guild.roles.cache.find((r) => r.id == arg);
+
     if (!role) {
         return msg.channel.send("I couldn't find that role. Is the spelling correct?");
     }
@@ -106,7 +116,7 @@ async function exec_role(msg: Discord.Message, arg: string) {
         // is only an issue about reporting the right error.
         try {
             await member.roles.add(role.id).catch((e) => console.log(e));
-            return msg.channel.send(`The role ${role.name} has been added to the user ${member.displayName}`);
+            return msg.channel.send(`The role ${role.name} has been added to the user <@${msg.author.id}>`);
         } catch (e) {
             console.error(e);
             return msg.channel.send("There was an issue adding the role. Ask the maintainer to check the logs.");
@@ -120,6 +130,7 @@ async function exec_role(msg: Discord.Message, arg: string) {
 // Register callbacks
 
 
+
 client!.on('ready', () => {
     if (client != null && client.user != null) {
         console.log(`Logged in as ${client.user.tag}`);
@@ -127,7 +138,12 @@ client!.on('ready', () => {
 });
 
 
+
+
 client.on('message', async function (msg: Discord.Message) {     //: Discord.Message
+
+    //msg.channel.send("@Y19");
+
     if (msg.content.startsWith('$')) {
         const text = msg.content.split(" ");
         let command = text[0];
@@ -189,6 +205,7 @@ client.on('message', async function (msg: Discord.Message) {     //: Discord.Mes
 
         
     }
+
 });
 
 
