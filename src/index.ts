@@ -75,7 +75,7 @@ async function exec_role(msg: Discord.Message, arg: string) {
 
     arg = arg.toLowerCase();
     let role_data = roles.find(c => c.id === arg);
-    
+
     if(!role_data){
         if(arg[0]=='y') return msg.channel.send("Are you from IITK? If yes then reach out to the moderators to get your batch role added to the list.");
         else return msg.channel.send(`Hey first take a look at the available roles.`);
@@ -87,7 +87,7 @@ async function exec_role(msg: Discord.Message, arg: string) {
 
     //msg.channel.send(`Giving ${member.displayName} the role ${arg}`);
 
-        
+
 
     if (!member) {
         return msg.channel.send("Can't find the user in server");
@@ -125,8 +125,8 @@ async function exec_role(msg: Discord.Message, arg: string) {
         }
     }
 
-    
-    
+
+
 }
 
 // Register callbacks
@@ -205,7 +205,7 @@ client.on('message', async function (msg: Discord.Message) {     //: Discord.Mes
         */
 // TILL HERE -------------------------------------------------------------------------------------------------------------------------//
 
-        
+
     }
 
 });
@@ -215,4 +215,3 @@ client.on('message', async function (msg: Discord.Message) {     //: Discord.Mes
 
 // You'll need to keep the bot token as a Heroku env var
 client.login(process.env["BOT_TOKEN"]);
-
